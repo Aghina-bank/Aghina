@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGHINA — La banque de votre enfant</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=DM+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0E1015;color:#EDF0F5;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 32px;background:linear-gradient(to bottom,#0E1015,transparent)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;letter-spacing:8px;color:#E8A855;text-transform:uppercase}
+.logo span{color:#4D90FF}
+.nav-btn{background:transparent;border:1px solid #252830;color:#8A939E;padding:8px 20px;border-radius:100px;font-size:13px;cursor:pointer;text-decoration:none;transition:all .3s}
+.nav-btn:hover{border-color:#C8873A;color:#E8A855}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 24px 80px;text-align:center;position:relative;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.o1{width:500px;height:500px;background:radial-gradient(circle,#1E6FFF15,transparent 70%);top:-100px;left:-100px;animation:d1 12s ease-in-out infinite alternate}
+.o2{width:400px;height:400px;background:radial-gradient(circle,#C8873A10,transparent 70%);bottom:-50px;right:-80px;animation:d2 15s ease-in-out infinite alternate}
+@keyframes d1{to{transform:translate(60px,40px)}}
+@keyframes d2{to{transform:translate(-40px,-60px)}}
+
+.pill{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#1E6FFF15,#C8873A15);border:1px solid #ffffff10;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#E8A855;margin-bottom:32px;animation:up .9s ease .1s both}
+.pill::before{content:’’;width:6px;height:6px;border-radius:50%;background:#3DD68C;box-shadow:0 0 8px #3DD68C;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+h1{font-family:‘Cormorant Garamond’,serif;font-size:clamp(44px,8vw,88px);font-weight:300;line-height:1;margin-bottom:8px;animation:up .9s ease .2s both}
+h1 em{font-style:italic;background:linear-gradient(135deg,#E8A855,#F0C070);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+h1 .bl{background:linear-gradient(135deg,#4D90FF,#7DB8FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.sub{font-size:clamp(14px,2vw,17px);color:#8A939E;max-width:500px;line-height:1.7;margin:24px auto 48px;font-weight:300;animation:up .9s ease .3s both}
+
+.form{display:flex;gap:10px;max-width:460px;width:100%;animation:up .9s ease .4s both;flex-wrap:wrap;justify-content:center}
+.form input{flex:1;min-width:200px;background:#1A1D24;border:1px solid #252830;border-radius:12px;padding:14px 20px;color:#EDF0F5;font-size:14px;font-family:‘DM Sans’,sans-serif;outline:none;transition:border-color .3s}
+.form input:focus{border-color:#1E6FFF}
+.form input::placeholder{color:#454B55}
+.form button{background:linear-gradient(135deg,#1E6FFF,#C8873A);border:none;border-radius:12px;padding:14px 26px;color:#fff;font-size:14px;font-weight:700;font-family:‘DM Sans’,sans-serif;cursor:pointer;transition:all .3s;box-shadow:0 4px 24px #1E6FFF33;white-space:nowrap}
+.form button:hover{transform:translateY(-2px);box-shadow:0 8px 32px #1E6FFF44}
+.note{font-size:12px;color:#454B55;margin-top:14px;animation:up .9s ease .5s both}
+.success{display:none;background:#3DD68C15;border:1px solid #3DD68C44;border-radius:12px;padding:16px 24px;color:#3DD68C;font-size:14px;font-weight:600;max-width:460px;width:100%;text-align:center}
+
+/* STATS */
+.stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;padding:32px 24px;background:linear-gradient(90deg,transparent,#1A1D24 20%,#1A1D24 80%,transparent);border-top:1px solid #252830;border-bottom:1px solid #252830}
+.stat{text-align:center}
+.stat-n{font-family:‘Cormorant Garamond’,serif;font-size:40px;font-weight:300;color:#E8A855;display:block;line-height:1}
+.stat-l{font-size:11px;color:#454B55;letter-spacing:2px;text-transform:uppercase;margin-top:6px;display:block}
+
+/* FEATURES */
+.features{padding:90px 24px;max-width:1050px;margin:0 auto}
+.slabel{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#4D90FF;font-weight:600;text-align:center;margin-bottom:14px}
+.stitle{font-family:‘Cormorant Garamond’,serif;font-size:clamp(30px,5vw,52px);font-weight:300;text-align:center;margin-bottom:56px;line-height:1.2}
+.stitle em{font-style:italic;color:#E8A855}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.card{background:linear-gradient(145deg,#1A1D24,#13151A);border:1px solid #252830;border-radius:20px;padding:32px 28px;transition:transform .3s,border-color .3s;position:relative;overflow:hidden}
+.card:hover{transform:translateY(-4px);border-color:#ffffff15}
+.card::before{content:’’;position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#C8873A 50%,transparent);opacity:0;transition:opacity .3s}
+.card:hover::before{opacity:1}
+.icon{font-size:34px;margin-bottom:18px;display:block}
+.ctitle{font-family:‘Cormorant Garamond’,serif;font-size:21px;font-weight:400;margin-bottom:10px}
+.cdesc{font-size:13.5px;color:#8A939E;line-height:1.7;font-weight:300}
+.tag{display:inline-block;margin-top:18px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px}
+.tb{background:#1E6FFF15;color:#4D90FF;border:1px solid #1E6FFF30}
+.tc{background:#C8873A15;color:#E8A855;border:1px solid #C8873A30}
+.tg{background:#3DD68C15;color:#3DD68C;border:1px solid #3DD68C30}
+
+/* STEPS */
+.how{padding:80px 24px 90px;max-width:760px;margin:0 auto}
+.steps{display:flex;flex-direction:column;margin-top:44px;position:relative}
+.steps::before{content:’’;position:absolute;left:27px;top:28px;bottom:28px;width:1px;background:linear-gradient(to bottom,#1E6FFF,#C8873A,transparent)}
+.step{display:flex;gap:26px;align-items:flex-start;padding:26px 0}
+.snum{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1A1D24,#13151A);border:1px solid #252830;display:flex;align-items:center;justify-content:center;font-family:‘Cormorant Garamond’,serif;font-size:20px;color:#E8A855;flex-shrink:0;position:relative;z-index:1}
+.sc{padding-top:10px}
+.st{font-size:16px;font-weight:600;margin-bottom:6px}
+.sd{font-size:13.5px;color:#8A939E;line-height:1.6;font-weight:300}
+
+/* QUOTE */
+.quote{padding:70px 24px;background:linear-gradient(135deg,#0A2A6E15,#7A4E1A10);border-top:1px solid #252830;border-bottom:1px solid #252830;text-align:center}
+blockquote{font-family:‘Cormorant Garamond’,serif;font-size:clamp(20px,4vw,34px);font-weight:300;font-style:italic;max-width:680px;margin:0 auto 20px;line-height:1.5}
+blockquote em{color:#E8A855;font-style:normal}
+.qauthor{font-size:12px;color:#454B55;letter-spacing:2px;text-transform:uppercase}
+
+/* CTA BOTTOM */
+.cta{padding:110px 24px;text-align:center;position:relative;overflow:hidden}
+.cta h2{font-family:‘Cormorant Garamond’,serif;font-size:clamp(34px,6vw,68px);font-weight:300;margin-bottom:18px;line-height:1.1}
+.cta h2 em{font-style:italic;color:#E8A855}
+.cta p{font-size:15px;color:#8A939E;margin-bottom:44px;font-weight:300}
+
+/* FOOTER */
+footer{padding:36px 40px;border-top:1px solid #252830;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer p{font-size:12px;color:#454B55}
+
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.rev{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rev.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:580px){
+nav{padding:16px 18px}
+.stats{gap:28px}
+.steps::before{display:none}
+footer{flex-direction:column;text-align:center}
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+  <div class="logo">AGH<span>I</span>NA</div>
+  <a href="#cta" class="nav-btn">Rejoindre →</a>
+</nav>
+
+<section class="hero">
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="pill">Bientôt disponible en Europe</div>
+  <h1>La première banque<br><em>pensée</em> pour<br><span class="bl">votre enfant</span></h1>
+  <p class="sub">Les parents investissent. Les enfants apprennent et suivent leur argent grandir. Carte de paiement, ETF sécurisés et cours financiers — dans une seule appli.</p>
+  <div class="form" id="f1">
+    <input type="email" id="e1" placeholder="votre@email.com">
+    <button onclick="signup('e1','f1','s1','c1')">Je m'inscris →</button>
+  </div>
+  <div class="success" id="s1">🎉 Bienvenue parmi les familles pionnières AGHINA !</div>
+  <p class="note">Gratuit · Sans engagement · Accès avant-première garanti</p>
+</section>
+
+<div class="stats rev">
+  <div class="stat"><span class="stat-n" id="c1">0</span><span class="stat-l">Familles inscrites</span></div>
+  <div class="stat"><span class="stat-n">0€</span><span class="stat-l">Frais de transaction</span></div>
+  <div class="stat"><span class="stat-n">100%</span><span class="stat-l">Dédié aux enfants</span></div>
+  <div class="stat"><span class="stat-n">🇪🇺</span><span class="stat-l">Premier en Europe</span></div>
+</div>
+
+<section class="features">
+  <p class="slabel rev">Ce qu'AGHINA offre</p>
+  <h2 class="stitle rev">Tout ce dont votre famille<br><em>a besoin</em></h2>
+  <div class="grid">
+    <div class="card rev"><span class="icon">💳</span><h3 class="ctitle">Carte de paiement enfant</h3><p class="cdesc">Votre enfant paie partout avec sa carte AGHINA. Vous définissez les plafonds, catégories autorisées, et recevez chaque dépense en temps réel.</p><span class="tag tb">Contrôle parental total</span></div>
+    <div class="card rev"><span class="icon">📈</span><h3 class="ctitle">Investissement en ETF</h3><p class="cdesc">Investissez dans des ETF sécurisés et performants. Votre enfant suit l'évolution de son patrimoine en temps réel avec des explications adaptées à son âge.</p><span class="tag tc">Meilleurs frais du marché</span></div>
+    <div class="card rev"><span class="icon">🎓</span><h3 class="ctitle">Cours financiers gratuits</h3><p class="cdesc">Des leçons adaptées à l'âge — de "c'est quoi une action ?" à "construire son premier portefeuille". L'éducation financière dès le plus jeune âge.</p><span class="tag tg">Entièrement gratuit</span></div>
+    <div class="card rev"><span class="icon">🔒</span><h3 class="ctitle">Sécurité bancaire maximale</h3><p class="cdesc">L'argent de votre enfant est protégé par les standards bancaires européens les plus stricts. Conforme DSP2 et RGPD.</p><span class="tag tb">Standards européens</span></div>
+    <div class="card rev"><span class="icon">🌱</span><h3 class="ctitle">Objectifs d'épargne</h3><p class="cdesc">Créez des objectifs ensemble — un vélo, un voyage, les études. L'enfant voit sa progression et comprend la valeur de la patience.</p><span class="tag tc">Ludique & motivant</span></div>
+    <div class="card rev"><span class="icon">👨‍👩‍👧</span><h3 class="ctitle">Vue parents & enfants</h3><p class="cdesc">Une interface dédiée aux parents pour gérer. Une interface adaptée aux enfants pour apprendre. Deux expériences, une seule appli.</p><span class="tag tg">Pensé pour les deux</span></div>
+  </div>
+</section>
+
+<section class="how">
+  <p class="slabel rev">Comment ça marche</p>
+  <h2 class="stitle rev">Simple pour les parents,<br><em>magique</em> pour les enfants</h2>
+  <div class="steps">
+    <div class="step rev"><div class="snum">1</div><div class="sc"><h3 class="st">Les parents créent le compte famille</h3><p class="sd">En 5 minutes, créez le compte AGHINA de votre enfant. Définissez les paramètres — plafonds, catégories, montants d'investissement.</p></div></div>
+    <div class="step rev"><div class="snum">2</div><div class="sc"><h3 class="st">Vous investissez en quelques secondes</h3><p class="sd">Choisissez parmi des ETF sélectionnés. Programmez des versements automatiques ou investissez ponctuellement. Zéro frais de transaction.</p></div></div>
+    <div class="step rev"><div class="snum">3</div><div class="sc"><h3 class="st">L'enfant suit et apprend</h3><p class="sd">Votre enfant voit son argent grandir en temps réel, complète des cours financiers et gagne des récompenses à chaque étape.</p></div></div>
+    <div class="step rev"><div class="snum">4</div><div class="sc"><h3 class="st">À 18 ans, il est prêt</h3><p class="sd">Votre enfant prend les rênes d'un patrimoine constitué et d'une vraie culture financière. Le meilleur cadeau que vous puissiez lui offrir.</p></div></div>
+  </div>
+</section>
+
+<div class="quote rev">
+  <blockquote>"J'aurais voulu qu'on m'apprenne à gérer l'argent quand j'étais petit.<br><em>AGHINA</em> donne à votre enfant ce que personne ne nous a donné."</blockquote>
+  <p class="qauthor">— Fondateur d'AGHINA</p>
+</div>
+
+<section class="cta" id="cta">
+  <h2 class="rev">Rejoignez les<br>familles <em>pionnières</em></h2>
+  <p class="rev">500 familles. Accès avant-première. Gratuit et sans engagement.</p>
+  <div class="form rev" id="f2" style="margin:0 auto">
+    <input type="email" id="e2" placeholder="votre@email.com">
+    <button onclick="signup('e2','f2','s2','c1')">Rejoindre →</button>
+  </div>
+  <div class="success" id="s2" style="margin:0 auto"></div>
+  <p class="note rev" style="margin-top:14px">Déjà <strong id="ci" style="color:#E8A855">0</strong> familles inscrites</p>
+</section>
+
+<footer>
+  <div class="logo">AGH<span>I</span>NA</div>
+  <p>© 2025 AGHINA · La banque de votre enfant · France 🇫🇷</p>
+  <p>En cours de développement</p>
+</footer>
+
+<script>
+let count = 47;
+let animated = false;
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+}, {threshold: 0.1});
+document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+
+// Counter animation
+function animCount(el, end, dur) {
+  let s = 0, step = end / (dur / 16);
+  const t = setInterval(() => {
+    s += step;
+    if(s >= end) { s = end; clearInterval(t); }
+    el.textContent = Math.floor(s);
+  }, 16);
+}
+
+const cObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting && !animated) {
+      animated = true;
+      animCount(document.getElementById('c1'), count, 1500);
+      animCount(document.getElementById('ci'), count, 1500);
+    }
+  });
+}, {threshold: 0.5});
+cObs.observe(document.getElementById('c1'));
+
+// Signup
+function signup(inputId, formId, successId, counterId) {
+  const email = document.getElementById(inputId).value;
+  if(!email || !email.includes('@')) {
+    document.getElementById(inputId).style.borderColor = '#FF5C5C';
+    setTimeout(() => document.getElementById(inputId).style.borderColor = '', 2000);
+    return;
+  }
+  count++;
+  document.getElementById('c1').textContent = count;
+  document.getElementById('ci').textContent = count;
+  document.getElementById(formId).style.display = 'none';
+  const s = document.getElementById(successId);
+  s.style.display = 'block';
+  s.textContent = '🎉 Bienvenue parmi les familles pionnières AGHINA !';
+}
+
+document.getElementById('e1').addEventListener('keypress', e => { if(e.key==='Enter') signup('e1','f1','s1','c1'); });
+document.getElementById('e2').addEventListener('keypress', e => { if(e.key==='Enter') signup('e2','f2','s2','c1'); });
+</script>
+
+</body>
+</html>
