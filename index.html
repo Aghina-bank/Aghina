@@ -1,250 +1,643 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AGHINA — La banque de votre enfant</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=DM+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0E1015;color:#EDF0F5;font-family:'DM Sans',sans-serif;overflow-x:hidden}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 32px;background:linear-gradient(to bottom,#0E1015,transparent)}
-.logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;letter-spacing:8px;color:#E8A855;text-transform:uppercase}
-.logo span{color:#4D90FF}
-.nav-btn{background:transparent;border:1px solid #252830;color:#8A939E;padding:8px 20px;border-radius:100px;font-size:13px;cursor:pointer;text-decoration:none;transition:all .3s}
-.nav-btn:hover{border-color:#C8873A;color:#E8A855}
+:root {
+  --grey:       #848484;
+  --grey-dark:  #3A3A3A;
+  --grey-mid:   #A0A0A0;
+  --grey-light: #E0E0E0;
+  --grey-bg:    #F4F4F4;
+  --white:      #FFFFFF;
+  --black:      #0A0A0A;
+  --gain:       #1A7A3F;
+}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 24px 80px;text-align:center;position:relative;overflow:hidden}
-.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
-.o1{width:500px;height:500px;background:radial-gradient(circle,#1E6FFF15,transparent 70%);top:-100px;left:-100px;animation:d1 12s ease-in-out infinite alternate}
-.o2{width:400px;height:400px;background:radial-gradient(circle,#C8873A10,transparent 70%);bottom:-50px;right:-80px;animation:d2 15s ease-in-out infinite alternate}
-@keyframes d1{to{transform:translate(60px,40px)}}
-@keyframes d2{to{transform:translate(-40px,-60px)}}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--white);
+  color: var(--black);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
 
-.pill{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#1E6FFF15,#C8873A15);border:1px solid #ffffff10;border-radius:100px;padding:7px 18px;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#E8A855;margin-bottom:32px;animation:up .9s ease .1s both}
-.pill::before{content:'';width:6px;height:6px;border-radius:50%;background:#3DD68C;box-shadow:0 0 8px #3DD68C;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+/* Trade Republic style font */
+.tr { font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; }
 
-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,8vw,88px);font-weight:300;line-height:1;margin-bottom:8px;animation:up .9s ease .2s both}
-h1 em{font-style:italic;background:linear-gradient(135deg,#E8A855,#F0C070);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-h1 .bl{background:linear-gradient(135deg,#4D90FF,#7DB8FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 0 56px; height: 64px;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--grey-light);
+}
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 700;
+  letter-spacing: 6px; text-transform: uppercase;
+  color: var(--black);
+}
+.nav-logo span { color: var(--grey); }
+.nav-links { display:flex; gap:32px; align-items:center; }
+.nav-links a {
+  font-size: 12px; font-weight: 500;
+  color: var(--grey); text-decoration:none;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  font-family: 'Barlow Condensed', sans-serif;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--black); }
+.nav-cta {
+  background: var(--black) !important;
+  color: var(--white) !important;
+  padding: 9px 24px; border-radius: 2px;
+}
+.nav-cta:hover { background: var(--grey-dark) !important; }
 
-.sub{font-size:clamp(14px,2vw,17px);color:#8A939E;max-width:500px;line-height:1.7;margin:24px auto 48px;font-weight:300;animation:up .9s ease .3s both}
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  padding: 120px 24px 100px;
+  text-align: center;
+  background: var(--white);
+}
 
-.form{display:flex;gap:10px;max-width:460px;width:100%;animation:up .9s ease .4s both;flex-wrap:wrap;justify-content:center}
-.form input{flex:1;min-width:200px;background:#1A1D24;border:1px solid #252830;border-radius:12px;padding:14px 20px;color:#EDF0F5;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .3s}
-.form input:focus{border-color:#1E6FFF}
-.form input::placeholder{color:#454B55}
-.form button{background:linear-gradient(135deg,#1E6FFF,#C8873A);border:none;border-radius:12px;padding:14px 26px;color:#fff;font-size:14px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .3s;box-shadow:0 4px 24px #1E6FFF33;white-space:nowrap}
-.form button:hover{transform:translateY(-2px);box-shadow:0 8px 32px #1E6FFF44}
-.note{font-size:12px;color:#454B55;margin-top:14px;animation:up .9s ease .5s both}
-.success{display:none;background:#3DD68C15;border:1px solid #3DD68C44;border-radius:12px;padding:16px 24px;color:#3DD68C;font-size:14px;font-weight:600;max-width:460px;width:100%;text-align:center}
+.live-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--grey-light);
+  padding: 7px 18px; border-radius: 2px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--grey); margin-bottom: 52px;
+  animation: fadeUp 1s ease .2s both;
+}
+.live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--gain);
+  animation: blink 2.5s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.3} }
 
-/* STATS */
-.stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;padding:32px 24px;background:linear-gradient(90deg,transparent,#1A1D24 20%,#1A1D24 80%,transparent);border-top:1px solid #252830;border-bottom:1px solid #252830}
-.stat{text-align:center}
-.stat-n{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:#E8A855;display:block;line-height:1}
-.stat-l{font-size:11px;color:#454B55;letter-spacing:2px;text-transform:uppercase;margin-top:6px;display:block}
+.hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(56px, 9vw, 116px);
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 0.95;
+  color: var(--black);
+  animation: fadeUp 1s ease .3s both;
+}
+.hero-title .accent {
+  color: var(--grey);
+  font-weight: 300;
+}
 
-/* FEATURES */
-.features{padding:90px 24px;max-width:1050px;margin:0 auto}
-.slabel{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#4D90FF;font-weight:600;text-align:center;margin-bottom:14px}
-.stitle{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,5vw,52px);font-weight:300;text-align:center;margin-bottom:56px;line-height:1.2}
-.stitle em{font-style:italic;color:#E8A855}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
-.card{background:linear-gradient(145deg,#1A1D24,#13151A);border:1px solid #252830;border-radius:20px;padding:32px 28px;transition:transform .3s,border-color .3s;position:relative;overflow:hidden}
-.card:hover{transform:translateY(-4px);border-color:#ffffff15}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#C8873A 50%,transparent);opacity:0;transition:opacity .3s}
-.card:hover::before{opacity:1}
-.icon{font-size:34px;margin-bottom:18px;display:block}
-.ctitle{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;margin-bottom:10px}
-.cdesc{font-size:13.5px;color:#8A939E;line-height:1.7;font-weight:300}
-.tag{display:inline-block;margin-top:18px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px}
-.tb{background:#1E6FFF15;color:#4D90FF;border:1px solid #1E6FFF30}
-.tc{background:#C8873A15;color:#E8A855;border:1px solid #C8873A30}
-.tg{background:#3DD68C15;color:#3DD68C;border:1px solid #3DD68C30}
+.hero-rule {
+  width: 48px; height: 2px;
+  background: var(--black);
+  margin: 40px auto;
+  animation: fadeUp 1s ease .4s both;
+}
 
-/* STEPS */
-.how{padding:80px 24px 90px;max-width:760px;margin:0 auto}
-.steps{display:flex;flex-direction:column;margin-top:44px;position:relative}
-.steps::before{content:'';position:absolute;left:27px;top:28px;bottom:28px;width:1px;background:linear-gradient(to bottom,#1E6FFF,#C8873A,transparent)}
-.step{display:flex;gap:26px;align-items:flex-start;padding:26px 0}
-.snum{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#1A1D24,#13151A);border:1px solid #252830;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;color:#E8A855;flex-shrink:0;position:relative;z-index:1}
-.sc{padding-top:10px}
-.st{font-size:16px;font-weight:600;margin-bottom:6px}
-.sd{font-size:13.5px;color:#8A939E;line-height:1.6;font-weight:300}
+.hero-sub {
+  font-size: 16px; color: var(--grey);
+  max-width: 420px; line-height: 1.75;
+  font-weight: 300;
+  animation: fadeUp 1s ease .5s both;
+}
 
-/* QUOTE */
-.quote{padding:70px 24px;background:linear-gradient(135deg,#0A2A6E15,#7A4E1A10);border-top:1px solid #252830;border-bottom:1px solid #252830;text-align:center}
-blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,4vw,34px);font-weight:300;font-style:italic;max-width:680px;margin:0 auto 20px;line-height:1.5}
-blockquote em{color:#E8A855;font-style:normal}
-.qauthor{font-size:12px;color:#454B55;letter-spacing:2px;text-transform:uppercase}
+/* Form */
+.hero-form {
+  display: flex; margin-top: 48px;
+  max-width: 400px; width: 100%;
+  border: 1.5px solid var(--black);
+  animation: fadeUp 1s ease .6s both;
+  overflow: hidden;
+}
+.hero-form input {
+  flex:1; background: var(--white);
+  border: none; padding: 14px 18px;
+  font-size: 14px; font-family: 'Inter', sans-serif;
+  color: var(--black); outline: none;
+}
+.hero-form input::placeholder { color: var(--grey-mid); }
+.hero-form button {
+  background: var(--black); color: var(--white);
+  border: none; padding: 14px 22px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; white-space: nowrap;
+  transition: background .2s;
+}
+.hero-form button:hover { background: var(--grey-dark); }
 
-/* CTA BOTTOM */
-.cta{padding:110px 24px;text-align:center;position:relative;overflow:hidden}
-.cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,6vw,68px);font-weight:300;margin-bottom:18px;line-height:1.1}
-.cta h2 em{font-style:italic;color:#E8A855}
-.cta p{font-size:15px;color:#8A939E;margin-bottom:44px;font-weight:300}
+.hero-note {
+  font-size: 12px; color: var(--grey-mid);
+  margin-top: 14px; letter-spacing: .5px;
+  animation: fadeUp 1s ease .7s both;
+}
 
-/* FOOTER */
-footer{padding:36px 40px;border-top:1px solid #252830;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-footer p{font-size:12px;color:#454B55}
+.success-msg {
+  display: none;
+  border: 1px solid #b8dfc4;
+  background: #f0faf4;
+  padding: 14px 24px; color: var(--gain);
+  font-size: 14px; font-weight: 500;
+  max-width: 400px; width: 100%;
+  text-align: center; margin-top: 48px;
+}
 
-@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-.rev{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
-.rev.vis{opacity:1;transform:translateY(0)}
+/* ── STATS ── */
+.stats {
+  display: flex; flex-wrap: wrap;
+  border-top: 1.5px solid var(--black);
+  border-bottom: 1px solid var(--grey-light);
+  background: var(--white);
+}
+.stat {
+  flex:1; min-width:130px;
+  padding: 30px 20px; text-align: center;
+  border-right: 1px solid var(--grey-light);
+}
+.stat:last-child { border-right: none; }
+.stat-n {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 38px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--black); display: block; line-height: 1;
+}
+.stat-l {
+  font-size: 10px; color: var(--grey);
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-top: 6px; display: block; font-weight: 500;
+  font-family: 'Barlow Condensed', sans-serif;
+}
 
-@media(max-width:580px){
-  nav{padding:16px 18px}
-  .stats{gap:28px}
-  .steps::before{display:none}
-  footer{flex-direction:column;text-align:center}
+/* ── CARDS ── */
+.cards-section {
+  padding: 110px 24px;
+  background: var(--grey-bg);
+  text-align: center;
+}
+.s-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--grey); margin-bottom: 16px; display: block;
+}
+.s-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; line-height: 1.1;
+  color: var(--black); margin-bottom: 10px;
+}
+.s-title .light { font-weight: 300; color: var(--grey); }
+.s-sub {
+  font-size: 14px; color: var(--grey);
+  font-weight: 300; margin-bottom: 60px;
+}
+
+.cards-row {
+  display: flex; gap: 24px;
+  justify-content: center; flex-wrap: wrap;
+}
+.bank-card {
+  width: 310px; height: 190px;
+  border-radius: 14px;
+  position: relative; overflow: hidden;
+  cursor: pointer;
+  transition: transform .4s cubic-bezier(.23,1,.32,1), box-shadow .4s;
+  flex-shrink: 0;
+}
+.bank-card:hover { transform: translateY(-10px) scale(1.02); }
+.bc-rose  { background: linear-gradient(135deg,#2A0A18,#8A2845,#C45070); box-shadow: 0 12px 40px rgba(160,56,90,.2); }
+.bc-blue  { background: linear-gradient(135deg,#061530,#0A2A6A,#1A5FE8); box-shadow: 0 12px 40px rgba(30,111,255,.2); }
+.bc-green { background: linear-gradient(135deg,#041A0C,#083D1C,#0F7038); box-shadow: 0 12px 40px rgba(19,138,68,.2); }
+.bc-rose:hover  { box-shadow: 0 24px 60px rgba(160,56,90,.35); }
+.bc-blue:hover  { box-shadow: 0 24px 60px rgba(30,111,255,.35); }
+.bc-green:hover { box-shadow: 0 24px 60px rgba(19,138,68,.35); }
+.bank-card::before {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(135deg, rgba(255,255,255,.13) 0%, transparent 55%);
+  pointer-events: none;
+}
+.bc-inner {
+  position:absolute; inset:0; padding:20px 24px;
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.bc-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: rgba(255,255,255,.9);
+}
+.bc-chip {
+  width: 30px; height: 22px; border-radius: 4px;
+  background: linear-gradient(135deg,#C8A020,#F0C040,#A88010);
+}
+.bc-num {
+  font-size: 12px; letter-spacing: 3px;
+  color: rgba(255,255,255,.6);
+}
+.bc-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,.8);
+}
+.bc-exp { font-size: 11px; color: rgba(255,255,255,.5); }
+.mc { display:flex; }
+.mc1, .mc2 { width:20px; height:20px; border-radius:50%; }
+.mc1 { background: rgba(255,255,255,.55); }
+.mc2 { background: rgba(255,255,255,.32); margin-left:-7px; }
+.card-name {
+  margin-top: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--grey);
+}
+
+/* ── FEATURES ── */
+.features { padding: 110px 24px; max-width: 1080px; margin: 0 auto; }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px; background: var(--grey-light);
+  border: 1px solid var(--grey-light);
+  margin-top: 60px;
+}
+.feat { background: var(--white); padding: 38px 32px; transition: background .2s; }
+.feat:hover { background: var(--grey-bg); }
+.feat-icon { font-size: 26px; margin-bottom: 18px; display: block; }
+.feat-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 10px; color: var(--black);
+}
+.feat-desc { font-size: 13.5px; color: var(--grey); line-height: 1.75; font-weight: 300; }
+.feat-tag {
+  display: inline-block; margin-top: 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--grey-mid);
+  border-top: 1px solid var(--grey-light);
+  padding-top: 12px; width: 100%;
+}
+
+/* ── HOW ── */
+.how { padding: 110px 24px; background: var(--grey-bg); }
+.how-inner { max-width: 640px; margin: 0 auto; }
+.steps { margin-top: 52px; }
+.step {
+  display: flex; gap: 28px;
+  padding: 28px 0; border-bottom: 1px solid var(--grey-light);
+  align-items: flex-start;
+}
+.step:last-child { border-bottom: none; }
+.step-n {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 36px; font-weight: 700;
+  color: var(--grey-light);
+  flex-shrink: 0; width: 52px; line-height: 1;
+}
+.step-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 8px; color: var(--black);
+}
+.step-desc { font-size: 13.5px; color: var(--grey); line-height: 1.75; font-weight: 300; }
+
+/* ── BOTTOM CTA ── */
+.bottom-cta {
+  padding: 130px 24px;
+  text-align: center;
+  background: var(--black);
+}
+.cta-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(40px, 7vw, 88px);
+  font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; line-height: 1;
+  color: var(--white); margin-bottom: 14px;
+}
+/* FIX: light text on dark background */
+.cta-title .light { color: var(--grey-mid); font-weight: 300; }
+.cta-sub {
+  font-size: 15px; color: var(--grey-mid);
+  margin-bottom: 48px; font-weight: 300;
+}
+.cta-form {
+  display: flex; max-width: 400px; margin: 0 auto;
+  border: 1.5px solid #444;
+  overflow: hidden;
+}
+.cta-form input {
+  flex:1; background: #1A1A1A;
+  border: none; padding: 14px 18px;
+  font-size: 14px; font-family: 'Inter', sans-serif;
+  /* FIX: white text on dark input */
+  color: var(--white); outline: none;
+}
+.cta-form input::placeholder { color: #666; }
+.cta-form button {
+  background: var(--white); color: var(--black);
+  border: none; padding: 14px 22px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; white-space: nowrap;
+  transition: background .2s;
+}
+.cta-form button:hover { background: var(--grey-bg); }
+.cta-note {
+  font-size: 12px;
+  /* FIX: visible on dark background */
+  color: #666;
+  margin-top: 16px;
+}
+/* FIX: counter visible on dark */
+#ci { color: var(--grey-mid) !important; }
+.cta-success {
+  display: none;
+  border: 1px solid #2A5A2A;
+  background: #0F200F;
+  padding: 14px 24px;
+  /* FIX: green visible on dark */
+  color: #6DCC88;
+  font-size: 14px; font-weight: 500;
+  max-width: 400px; margin: 0 auto; text-align: center;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 32px 56px;
+  border-top: 1px solid var(--grey-light);
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 12px;
+  background: var(--white);
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px; font-weight: 700;
+  letter-spacing: 6px; text-transform: uppercase;
+  color: var(--black);
+}
+.footer-logo span { color: var(--grey); }
+footer p { font-size: 12px; color: var(--grey-mid); }
+
+/* ── FADE ANIMATIONS ── */
+.fade {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .85s ease, transform .85s ease;
+}
+.fade.visible { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .1s; }
+.d2 { transition-delay: .2s; }
+.d3 { transition-delay: .3s; }
+.d4 { transition-delay: .4s; }
+.d5 { transition-delay: .5s; }
+.d6 { transition-delay: .6s; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── MOBILE ── */
+@media(max-width:640px){
+  nav { padding: 0 20px; }
+  .nav-links a:not(.nav-cta) { display: none; }
+  .stats { flex-direction: column; }
+  .stat { border-right:none; border-bottom:1px solid var(--grey-light); }
+  .stat:last-child { border-bottom: none; }
+  .hero-form { flex-direction: column; }
+  .hero-form button { border-top: 1px solid #222; }
+  footer { flex-direction:column; text-align:center; padding:24px 20px; }
 }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="logo">AGH<span>I</span>NA</div>
-  <a href="#cta" class="nav-btn">Rejoindre →</a>
+  <div class="nav-logo">AGH<span>I</span>NA</div>
+  <div class="nav-links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#how">Comment ça marche</a>
+    <a href="#cta" class="nav-cta">Rejoindre</a>
+  </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="orb o1"></div>
-  <div class="orb o2"></div>
-  <div class="pill">Bientôt disponible en Europe</div>
-  <h1>La première banque<br><em>pensée</em> pour<br><span class="bl">votre enfant</span></h1>
-  <p class="sub">Les parents investissent. Les enfants apprennent et suivent leur argent grandir. Carte de paiement, ETF sécurisés et cours financiers — dans une seule appli.</p>
-  <div class="form" id="f1">
+  <div class="live-badge"><div class="live-dot"></div>Bientôt disponible en Europe</div>
+  <h1 class="hero-title">
+    La première banque<br>
+    <span class="accent">pour votre enfant</span>
+  </h1>
+  <div class="hero-rule"></div>
+  <p class="hero-sub">Les parents investissent. Les enfants apprennent et suivent leur argent grandir. Une carte, des ETF sécurisés et des cours — dans une seule appli.</p>
+  <div class="hero-form" id="f1">
     <input type="email" id="e1" placeholder="votre@email.com">
-    <button onclick="signup('e1','f1','s1')">Je m'inscris →</button>
+    <button onclick="signup('e1','f1','s1')">Rejoindre</button>
   </div>
-  <div class="success" id="s1">🎉 Bienvenue parmi les familles pionnières AGHINA !</div>
-  <p class="note">Gratuit · Sans engagement · Accès avant-première garanti</p>
+  <div class="success-msg" id="s1">🎉 Bienvenue parmi les familles pionnières AGHINA !</div>
+  <p class="hero-note">Gratuit · Sans engagement · Accès avant-première garanti</p>
 </section>
 
-<div class="stats rev">
-  <div class="stat"><span class="stat-n" id="c1">0</span><span class="stat-l">Familles inscrites</span></div>
-  <div class="stat"><span class="stat-n">0€</span><span class="stat-l">Frais de transaction</span></div>
-  <div class="stat"><span class="stat-n">100%</span><span class="stat-l">Dédié aux enfants</span></div>
-  <div class="stat"><span class="stat-n">🇪🇺</span><span class="stat-l">Premier en Europe</span></div>
+<!-- STATS -->
+<div class="stats">
+  <div class="stat fade d1"><span class="stat-n" id="c1">0</span><span class="stat-l">Familles inscrites</span></div>
+  <div class="stat fade d2"><span class="stat-n">0 €</span><span class="stat-l">Frais de transaction</span></div>
+  <div class="stat fade d3"><span class="stat-n">100%</span><span class="stat-l">Dédié aux enfants</span></div>
+  <div class="stat fade d4"><span class="stat-n">🇪🇺</span><span class="stat-l">Premier en Europe</span></div>
 </div>
 
-<section class="features">
-  <p class="slabel rev">Ce qu'AGHINA offre</p>
-  <h2 class="stitle rev">Tout ce dont votre famille<br><em>a besoin</em></h2>
-  <div class="grid">
-    <div class="card rev"><span class="icon">💳</span><h3 class="ctitle">Carte de paiement enfant</h3><p class="cdesc">Votre enfant paie partout avec sa carte AGHINA. Vous définissez les plafonds, catégories autorisées, et recevez chaque dépense en temps réel.</p><span class="tag tb">Contrôle parental total</span></div>
-    <div class="card rev"><span class="icon">📈</span><h3 class="ctitle">Investissement en ETF</h3><p class="cdesc">Investissez dans des ETF sécurisés et performants. Votre enfant suit l'évolution de son patrimoine en temps réel avec des explications adaptées à son âge.</p><span class="tag tc">Meilleurs frais du marché</span></div>
-    <div class="card rev"><span class="icon">🎓</span><h3 class="ctitle">Cours financiers gratuits</h3><p class="cdesc">Des leçons adaptées à l'âge — de "c'est quoi une action ?" à "construire son premier portefeuille". L'éducation financière dès le plus jeune âge.</p><span class="tag tg">Entièrement gratuit</span></div>
-    <div class="card rev"><span class="icon">🔒</span><h3 class="ctitle">Sécurité bancaire maximale</h3><p class="cdesc">L'argent de votre enfant est protégé par les standards bancaires européens les plus stricts. Conforme DSP2 et RGPD.</p><span class="tag tb">Standards européens</span></div>
-    <div class="card rev"><span class="icon">🌱</span><h3 class="ctitle">Objectifs d'épargne</h3><p class="cdesc">Créez des objectifs ensemble — un vélo, un voyage, les études. L'enfant voit sa progression et comprend la valeur de la patience.</p><span class="tag tc">Ludique & motivant</span></div>
-    <div class="card rev"><span class="icon">👨‍👩‍👧</span><h3 class="ctitle">Vue parents & enfants</h3><p class="cdesc">Une interface dédiée aux parents pour gérer. Une interface adaptée aux enfants pour apprendre. Deux expériences, une seule appli.</p><span class="tag tg">Pensé pour les deux</span></div>
+<!-- CARDS -->
+<section class="cards-section">
+  <span class="s-label fade">La carte AGHINA</span>
+  <h2 class="s-title fade d1">Leur première <span class="light">vraie</span> carte</h2>
+  <p class="s-sub fade d2">Choisie par l'enfant. Contrôlée par les parents.</p>
+  <div class="cards-row">
+    <div class="fade d1">
+      <div class="bank-card bc-rose">
+        <div class="bc-inner">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div class="bc-logo">Aghina</div><div class="bc-chip"></div>
+          </div>
+          <div class="bc-num">4820  ••••  ••••  3741</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end">
+            <div class="bc-name">Emma Dupont</div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+              <div class="mc"><div class="mc1"></div><div class="mc2"></div></div>
+              <div class="bc-exp">12/30</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="card-name">Rose Saumon</p>
+    </div>
+    <div class="fade d2">
+      <div class="bank-card bc-blue">
+        <div class="bc-inner">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div class="bc-logo">Aghina</div><div class="bc-chip"></div>
+          </div>
+          <div class="bc-num">4820  ••••  ••••  5892</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end">
+            <div class="bc-name">Lucas Martin</div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+              <div class="mc"><div class="mc1"></div><div class="mc2"></div></div>
+              <div class="bc-exp">08/31</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="card-name">Bleu Électrique</p>
+    </div>
+    <div class="fade d3">
+      <div class="bank-card bc-green">
+        <div class="bc-inner">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div class="bc-logo">Aghina</div><div class="bc-chip"></div>
+          </div>
+          <div class="bc-num">4820  ••••  ••••  2047</div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end">
+            <div class="bc-name">Léa Bernard</div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+              <div class="mc"><div class="mc1"></div><div class="mc2"></div></div>
+              <div class="bc-exp">03/32</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="card-name">Vert Émeraude</p>
+    </div>
   </div>
 </section>
 
-<section class="how">
-  <p class="slabel rev">Comment ça marche</p>
-  <h2 class="stitle rev">Simple pour les parents,<br><em>magique</em> pour les enfants</h2>
-  <div class="steps">
-    <div class="step rev"><div class="snum">1</div><div class="sc"><h3 class="st">Les parents créent le compte famille</h3><p class="sd">En 5 minutes, créez le compte AGHINA de votre enfant. Définissez les paramètres — plafonds, catégories, montants d'investissement.</p></div></div>
-    <div class="step rev"><div class="snum">2</div><div class="sc"><h3 class="st">Vous investissez en quelques secondes</h3><p class="sd">Choisissez parmi des ETF sélectionnés. Programmez des versements automatiques ou investissez ponctuellement. Zéro frais de transaction.</p></div></div>
-    <div class="step rev"><div class="snum">3</div><div class="sc"><h3 class="st">L'enfant suit et apprend</h3><p class="sd">Votre enfant voit son argent grandir en temps réel, complète des cours financiers et gagne des récompenses à chaque étape.</p></div></div>
-    <div class="step rev"><div class="snum">4</div><div class="sc"><h3 class="st">À 18 ans, il est prêt</h3><p class="sd">Votre enfant prend les rênes d'un patrimoine constitué et d'une vraie culture financière. Le meilleur cadeau que vous puissiez lui offrir.</p></div></div>
+<!-- FEATURES -->
+<section class="features" id="features">
+  <span class="s-label fade">Ce qu'AGHINA offre</span>
+  <h2 class="s-title fade d1">Tout ce dont votre famille <span class="light">a besoin</span></h2>
+  <div class="features-grid">
+    <div class="feat fade d1"><span class="feat-icon">💳</span><h3 class="feat-title">Carte enfant</h3><p class="feat-desc">Votre enfant paie partout. Vous définissez les plafonds et recevez chaque dépense en temps réel.</p><span class="feat-tag">Contrôle parental total</span></div>
+    <div class="feat fade d2"><span class="feat-icon">📈</span><h3 class="feat-title">Investissement ETF</h3><p class="feat-desc">Des ETF sécurisés et performants. L'enfant suit son patrimoine grandir en temps réel.</p><span class="feat-tag">Meilleurs frais du marché</span></div>
+    <div class="feat fade d3"><span class="feat-icon">🎓</span><h3 class="feat-title">Cours financiers</h3><p class="feat-desc">Des leçons adaptées à l'âge. De "c'est quoi une action ?" à "construire son portefeuille".</p><span class="feat-tag">Entièrement gratuit</span></div>
+    <div class="feat fade d4"><span class="feat-icon">🔒</span><h3 class="feat-title">Sécurité maximale</h3><p class="feat-desc">Standards bancaires européens les plus stricts. Conforme DSP2 et RGPD.</p><span class="feat-tag">Standards européens</span></div>
+    <div class="feat fade d5"><span class="feat-icon">🌱</span><h3 class="feat-title">Objectifs d'épargne</h3><p class="feat-desc">Créez des objectifs ensemble. L'enfant voit sa progression et comprend la valeur du temps.</p><span class="feat-tag">Ludique et motivant</span></div>
+    <div class="feat fade d6"><span class="feat-icon">👨‍👩‍👧</span><h3 class="feat-title">Vue parents & enfants</h3><p class="feat-desc">Une interface pour gérer. Une pour apprendre. Deux expériences, une seule appli.</p><span class="feat-tag">Pensé pour les deux</span></div>
   </div>
 </section>
 
-<div class="quote rev">
-  <blockquote>"J'aurais voulu qu'on m'apprenne à gérer l'argent quand j'étais petit.<br><em>AGHINA</em> donne à votre enfant ce que personne ne nous a donné."</blockquote>
-  <p class="qauthor">— Fondateur d'AGHINA</p>
-</div>
+<!-- HOW -->
+<section class="how" id="how">
+  <div class="how-inner">
+    <span class="s-label fade">Comment ça marche</span>
+    <h2 class="s-title fade d1">Simple pour les parents, <span class="light">naturel</span> pour les enfants</h2>
+    <div class="steps">
+      <div class="step fade d1"><div class="step-n">01</div><div><h3 class="step-title">Créez le compte famille</h3><p class="step-desc">En 5 minutes. Définissez les plafonds, catégories et montants d'investissement selon vos préférences.</p></div></div>
+      <div class="step fade d2"><div class="step-n">02</div><div><h3 class="step-title">Investissez en quelques secondes</h3><p class="step-desc">ETF sélectionnés pour leur sécurité. Versements automatiques ou ponctuels. Zéro frais de transaction.</p></div></div>
+      <div class="step fade d3"><div class="step-n">03</div><div><h3 class="step-title">L'enfant suit et apprend</h3><p class="step-desc">Il voit son argent grandir, complète des cours financiers et gagne des récompenses à chaque étape.</p></div></div>
+      <div class="step fade d4"><div class="step-n">04</div><div><h3 class="step-title">À 18 ans, il est prêt</h3><p class="step-desc">Un patrimoine constitué. Une culture financière solide. Le meilleur cadeau que vous puissiez lui offrir.</p></div></div>
+    </div>
+  </div>
+</section>
 
-<section class="cta" id="cta">
-  <h2 class="rev">Rejoignez les<br>familles <em>pionnières</em></h2>
-  <p class="rev">500 familles. Accès avant-première. Gratuit et sans engagement.</p>
-  <div class="form rev" id="f2" style="margin:0 auto">
+<!-- BOTTOM CTA -->
+<section class="bottom-cta" id="cta">
+  <h2 class="cta-title fade">Rejoignez les familles <span class="light">pionnières</span></h2>
+  <p class="cta-sub fade d1">500 familles · Accès avant-première · Gratuit et sans engagement</p>
+  <div class="cta-form fade d2" id="f2">
     <input type="email" id="e2" placeholder="votre@email.com">
-    <button onclick="signup('e2','f2','s2')">Rejoindre →</button>
+    <button onclick="signup('e2','f2','s2')">Rejoindre</button>
   </div>
-  <div class="success" id="s2" style="margin:0 auto"></div>
-  <p class="note rev" style="margin-top:14px">Déjà <strong id="ci" style="color:#E8A855">0</strong> familles inscrites</p>
+  <div class="cta-success" id="s2"></div>
+  <p class="cta-note fade d3">Déjà <strong id="ci">0</strong> familles inscrites</p>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <div class="logo">AGH<span>I</span>NA</div>
+  <div class="footer-logo">AGH<span>I</span>NA</div>
   <p>© 2025 AGHINA · La banque de votre enfant · France 🇫🇷</p>
   <p>En cours de développement</p>
 </footer>
 
 <script>
-let count = 47;
-let animated = false;
+let count = 47, animated = false;
 
-// Scroll reveal
 const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
-}, {threshold: 0.1});
-document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade').forEach(el => obs.observe(el));
 
-// Counter animation
 function animCount(el, end, dur) {
   let s = 0, step = end / (dur / 16);
   const t = setInterval(() => {
-    s += step;
-    if(s >= end) { s = end; clearInterval(t); }
+    s += step; if (s >= end) { s = end; clearInterval(t); }
     el.textContent = Math.floor(s);
   }, 16);
 }
 
 const cObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if(e.isIntersecting && !animated) {
+    if (e.isIntersecting && !animated) {
       animated = true;
-      animCount(document.getElementById('c1'), count, 1500);
-      animCount(document.getElementById('ci'), count, 1500);
+      animCount(document.getElementById('c1'), count, 1800);
+      animCount(document.getElementById('ci'), count, 1800);
     }
   });
-}, {threshold: 0.5});
+}, { threshold: 0.5 });
 cObs.observe(document.getElementById('c1'));
 
-// Signup avec Formspree
 async function signup(inputId, formId, successId) {
   const email = document.getElementById(inputId).value;
-  if(!email || !email.includes('@')) {
-    document.getElementById(inputId).style.borderColor = '#FF5C5C';
-    setTimeout(() => document.getElementById(inputId).style.borderColor = '', 2000);
+  if (!email || !email.includes('@')) {
+    document.getElementById(inputId).style.outline = '2px solid #FF5C5C';
+    setTimeout(() => document.getElementById(inputId).style.outline = '', 2000);
     return;
   }
   const btn = document.querySelector('#' + formId + ' button');
-  btn.textContent = 'Envoi...';
-  btn.disabled = true;
+  btn.textContent = 'Envoi...'; btn.disabled = true;
   try {
     const res = await fetch('https://formspree.io/f/mpqbvlab', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-      body: JSON.stringify({email: email, source: inputId === 'e1' ? 'Hero' : 'Bottom CTA'})
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email, source: inputId === 'e1' ? 'Hero' : 'CTA' })
     });
-    if(res.ok) {
+    if (res.ok) {
       count++;
       document.getElementById('c1').textContent = count;
       document.getElementById('ci').textContent = count;
       document.getElementById(formId).style.display = 'none';
       const s = document.getElementById(successId);
       s.style.display = 'block';
-      s.textContent = '🎉 Bienvenue parmi les familles pionnières AGHINA ! Vérifiez votre email.';
-    } else {
-      btn.textContent = 'Réessayer';
-      btn.disabled = false;
-    }
-  } catch(err) {
-    btn.textContent = 'Réessayer';
-    btn.disabled = false;
-  }
+      s.textContent = '🎉 Bienvenue parmi les familles pionnières AGHINA !';
+    } else { btn.textContent = 'Réessayer'; btn.disabled = false; }
+  } catch { btn.textContent = 'Réessayer'; btn.disabled = false; }
 }
 
-document.getElementById('e1').addEventListener('keypress', e => { if(e.key==='Enter') signup('e1','f1','s1'); });
-document.getElementById('e2').addEventListener('keypress', e => { if(e.key==='Enter') signup('e2','f2','s2'); });
+document.getElementById('e1').addEventListener('keypress', e => { if (e.key === 'Enter') signup('e1','f1','s1'); });
+document.getElementById('e2').addEventListener('keypress', e => { if (e.key === 'Enter') signup('e2','f2','s2'); });
 </script>
 </body>
 </html>
