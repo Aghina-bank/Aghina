@@ -88,13 +88,14 @@ nav {
 
 .hero-title {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(56px, 9vw, 116px);
+  font-size: clamp(36px, 8vw, 116px);
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  line-height: 0.95;
+  line-height: 1;
   color: var(--black);
   animation: fadeUp 1s ease .3s both;
+  word-break: break-word;
 }
 .hero-title .accent {
   color: var(--grey);
@@ -604,6 +605,7 @@ footer p { font-size: 12px; color: var(--grey-mid); }
   .cta-form button { border-top: 1px solid #444; }
   footer { flex-direction:column; text-align:center; padding:24px 20px; }
   .founder-card { padding: 24px 22px; }
+  .hero-title { letter-spacing: 0px; }
 }
 </style>
 </head>
@@ -615,7 +617,6 @@ footer p { font-size: 12px; color: var(--grey-mid); }
   <div class="nav-links">
     <a href="#why">Notre mission</a>
     <a href="#features">Fonctionnalités</a>
-    <a href="#cta" class="nav-cta">Rejoindre</a>
   </div>
 </nav>
 
@@ -623,7 +624,7 @@ footer p { font-size: 12px; color: var(--grey-mid); }
 <section class="hero">
   <div class="live-badge"><div class="live-dot"></div>Sondage en cours · Validation projet</div>
   <h1 class="hero-title">
-    La première banque<br>
+    L'application d'investissement<br>
     <span class="accent">pour votre enfant</span>
   </h1>
   <div class="hero-rule"></div>
@@ -643,7 +644,7 @@ footer p { font-size: 12px; color: var(--grey-mid); }
 <section class="why" id="why">
   <div class="why-inner">
     <span class="why-eyebrow">Pourquoi AGHINA existe</span>
-    <h2 class="why-title">Une <span class="light">leçon de vie</span><br>avant d'être une banque</h2>
+    <h2 class="why-title">Une <span class="light">leçon de vie</span><br>avant d'être une application</h2>
 
     <div class="founder-card">
       <div class="founder-label">Mot du fondateur</div>
@@ -815,7 +816,7 @@ footer p { font-size: 12px; color: var(--grey-mid); }
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">AGH<span>I</span>NA</div>
-  <p>© 2025 AGHINA · La banque de votre enfant · France 🇫🇷</p>
+  <p>© 2025 AGHINA · L'application d'investissement pour votre enfant · France 🇫🇷</p>
   <p>Sondage de validation · En développement</p>
 </footer>
 
